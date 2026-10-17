@@ -30,14 +30,14 @@
 <script>
 (function(){
   var song=document.getElementById('song'),openBtn=document.getElementById('open'),
-      music=document.getElementById('music'),gate=document.getElementById('gate'),TARGET=0.6;
+      music=document.getElementById('music'),gate=document.getElementById('gate'),TARGET=0.25;
   openBtn.addEventListener('click',function(){
     document.body.classList.add('opened');
     song.volume=0;
     var p=song.play();
     if(p&&p.then){p.then(function(){
       music.hidden=false;
-      var v=0,t=setInterval(function(){v=Math.min(v+0.02,TARGET);song.volume=v;if(v>=TARGET)clearInterval(t);},120);
+      var v=0,t=setInterval(function(){v=Math.min(v+0.005,TARGET);song.volume=v;if(v>=TARGET)clearInterval(t);},120);
     }).catch(function(){});}
     setTimeout(function(){gate.style.display='none';},1400);
   });
