@@ -10,10 +10,16 @@
 <body>
 <div class="photos"><div class="half one"></div><div class="half two"></div></div>
 <div class="tint"></div>
+<audio id="song" src="song.mp3" loop preload="auto"></audio>
+<div class="gate" id="gate">
+  <button class="gate-btn" id="open" type="button">Open your card 💜</button>
+  <p class="gate-note">🔊 turn your sound on my lovee</p>
+</div>
+<button class="music" id="music" type="button" aria-label="Pause or play music" hidden>🎵</button>
 <main class="stage">
   <article class="glass">
     <h1>Happy birthday, my sweet pumpkin sugar honey pie! ❤️💜</h1>
-    <p>I'm so sorry that this isn't a proper card. I tried my best to look for some, but the ones I saw didn't look like ones I would give my baby (they were extremely childish).</p>
+    <p>I'm so sorry that this isn't a proper card. I tried my best to look for some, but the ones I saw didn't look like ones I would give my baby (they didnt look nice).</p>
     <p>Where do I even start? We have been friends for a very long time. We barely spoke before, but now that I've seen how life is with you in it, I'm wondering how much better the past few years could have been if we had at least spoken on friendly terms.</p>
     <p>I love you so much, baby, and on this wonderful day, I want to remind you of how beautiful, loving, calming, intelligent, amazing, and gorgeous you are!! And of course, I owe your mother a huge thank you for giving birth to this heavenly wonder!!</p>
     <p>I wish you a happy birthday, my heart, and I pray that you receive the strength to pursue your dreams and that you fulfill your life's purpose! With each day I spend with you, I spend some time reflecting on how much more joy you have added to my life. I am super grateful for you, and I will <b>NEVER</b> take you for granted!</p>
@@ -21,5 +27,25 @@
     <div class="sign">Happy Birthday Nwam! ❤️💜</div>
   </article>
 </main>
+<script>
+(function(){
+  var song=document.getElementById('song'),openBtn=document.getElementById('open'),
+      music=document.getElementById('music'),gate=document.getElementById('gate'),TARGET=0.6;
+  openBtn.addEventListener('click',function(){
+    document.body.classList.add('opened');
+    song.volume=0;
+    var p=song.play();
+    if(p&&p.then){p.then(function(){
+      music.hidden=false;
+      var v=0,t=setInterval(function(){v=Math.min(v+0.02,TARGET);song.volume=v;if(v>=TARGET)clearInterval(t);},120);
+    }).catch(function(){});}
+    setTimeout(function(){gate.style.display='none';},1400);
+  });
+  music.addEventListener('click',function(){
+    if(song.paused){song.volume=TARGET;song.play();music.textContent='🎵';}
+    else{song.pause();music.textContent='🔇';}
+  });
+})();
+</script>
 </body>
 </html>

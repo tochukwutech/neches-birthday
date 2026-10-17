@@ -64,3 +64,35 @@ body{position:relative;overflow:hidden;font-family:'Quicksand',system-ui,sans-se
 h1{font-family:'Dancing Script',cursive,serif;font-weight:600;font-size:clamp(28px,6vw,42px);line-height:1.2;margin:0 0 18px;text-align:center;text-shadow:0 1px 10px rgba(255,255,255,.6)}
 p{margin:0 0 15px;font-size:clamp(15px,3.6vw,17.5px);line-height:1.65;font-weight:500;text-shadow:0 1px 6px rgba(255,255,255,.5)}
 .sign{font-family:'Dancing Script',cursive,serif;font-size:clamp(24px,5vw,30px);text-align:center;margin:22px 0 0}
+
+/* ---------- Tap-to-open gate + music ---------- */
+.stage{opacity:0;transform:scale(.96);pointer-events:none;transition:opacity 1.4s ease .5s,transform 1.4s ease .5s}
+.opened .stage{opacity:1;transform:none;pointer-events:auto}
+
+.gate{
+  position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  background:radial-gradient(90% 70% at 50% 30%,#f0a6ff,transparent 70%),linear-gradient(160deg,#7b2ff7,#e375ff);
+  transition:opacity 1.2s ease,visibility 1.2s;
+}
+.opened .gate{opacity:0;visibility:hidden;pointer-events:none}
+.gate-btn{
+  font-family:'Dancing Script',cursive,serif;font-weight:600;font-size:clamp(26px,6vw,34px);color:var(--text);
+  padding:22px 38px;border-radius:999px;cursor:pointer;
+  background:rgba(255,255,255,.4);border:1.5px solid rgba(255,255,255,.7);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  box-shadow:inset 0 2px 2px rgba(255,255,255,.8),0 16px 40px rgba(60,0,90,.3);
+  animation:breathe-btn 3.5s ease-in-out infinite;
+}
+.gate-note{margin:0;color:#fff;font-size:15px;opacity:.9;text-shadow:0 1px 8px rgba(80,0,110,.4)}
+@keyframes breathe-btn{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.gate-btn{animation:none}}
+
+.music{
+  position:fixed;z-index:10;right:16px;top:calc(env(safe-area-inset-top,0px) + 14px);
+  width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;
+  background:rgba(255,255,255,.4);border:1.5px solid rgba(255,255,255,.7);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  opacity:0;pointer-events:none;transition:opacity 1.4s ease 1s;
+}
+.opened .music{opacity:1;pointer-events:auto}
+.music[hidden]{display:none}
